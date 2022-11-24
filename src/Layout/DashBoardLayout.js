@@ -7,6 +7,7 @@ import useSeller from '../Hooks/useSeller';
 import Navbar from '../Pages/Shared/Navbar/Navbar';
 
 const DashboardLayout = () => {
+    <Navbar></Navbar>
     const { user } = useContext(AuthContext);
     const [isAdmin] = useAdmin(user?.email)
     const [isBuyer] = useBuyer(user?.email)

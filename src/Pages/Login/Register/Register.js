@@ -5,7 +5,8 @@ import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 import Title from "../../../Hooks/Title";
 import img from "../../../assets/images/register.png";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
+import useToken from '../../../Hooks/useToken';
 
 const Register = () => {
   Title("Register");
@@ -15,18 +16,23 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const { createUser, providerLogin, updateUser } = useContext(AuthContext);
   const [signUpError, setSignUPError] = useState("");
   const location = useLocation();
+  const [createdUserEmail, setCreatedUserEmail] = useState('')
+  const [token] = useToken(createdUserEmail);
   const navigate = useNavigate();
 
   const googleProvider = new GoogleAuthProvider();
 
   const from = location.state?.from?.pathname || "/";
 
+  if (token) {
+    navigate("/");
+  }
+
   const handleSignUp = (data) => {
-    console.log(data);
-    const form = data.target;
     setSignUPError("");
     createUser(data.email, data.password)
       .then((result) => {
@@ -36,10 +42,11 @@ const Register = () => {
         const userInfo = {
           displayName: data.name,
         };
-        form.reset();
         navigate(from, { replace: true });
         updateUser(userInfo)
-          .then(() => {})
+          .then(() => {
+            saveUser(data.name, data.email);
+          })
           .catch((err) => console.log(err));
       })
       .catch((error) => {
@@ -48,18 +55,33 @@ const Register = () => {
       });
   };
 
+  const saveUser = (name, email) => {
+    const user = { name, email };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCreatedUserEmail(email);
+      });
+  };
+
   const handleGoogleSignIn = () => {
     providerLogin(googleProvider)
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-            navigate(from, {replace: true});
-        })
-        .catch(error => {
-          console.log(error);
-          setSignUPError(error.message);
-        })
-  }
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log(error);
+        setSignUPError(error.message);
+      });
+  };
 
   return (
     <div>
@@ -135,9 +157,13 @@ const Register = () => {
                   <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                 </svg>
               </div>
-        
-              <input className='bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300' value="Sign Up" type="submit" />
-              {signUpError && <p className='text-red-600'>{signUpError}</p>}
+
+              <input
+                className="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300"
+                value="Sign Up"
+                type="submit"
+              />
+              {signUpError && <p className="text-red-600">{signUpError}</p>}
             </form>
 
             <div className="mt-6 grid grid-cols-3 items-center text-gray-400">
@@ -150,7 +176,10 @@ const Register = () => {
               If you are already a member, easily log in
             </p>
 
-            <button onClick={handleGoogleSignIn} className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-[#002D74]">
+            <button
+              onClick={handleGoogleSignIn}
+              className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-[#002D74]"
+            >
               <svg
                 className="mr-3"
                 xmlns="http://www.w3.org/2000/svg"

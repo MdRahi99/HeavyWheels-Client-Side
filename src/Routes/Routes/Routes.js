@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layout/Main";
-import AllCategories from "../../Pages/AllCategories/AllCategories";
+import AllCategories from "../../Pages/Categories/AllCategories/AllCategories";
 import Home from "../../Pages/Home/Home/Home";
 import Blogs from "../../Pages/Blogs/Blogs";
 import Login from "../../Pages/Login/Login/Login";
@@ -22,6 +22,7 @@ import MyProducts from "../../Pages/Dashboard/SellerDashboard/MyProducts/MyProdu
 import AllSellers from "../../Pages/Dashboard/AdminDashboard/AllSellers/AllSellers";
 import AllBuyers from "../../Pages/Dashboard/AdminDashboard/AllBuyers/AllBuyers";
 import ReportedItems from "../../Pages/Dashboard/AdminDashboard/ReportedItems/ReportedItems";
+import AllProducts from "../../Pages/Categories/AllProducts/AllProducts";
 
 const router = createBrowserRouter([
     {
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
             {
                 path: '/categories',
                 element: <AllCategories></AllCategories>
+            },
+            {
+                path: '/products/:category_id',
+                element: <PrivateRoute><AllProducts></AllProducts></PrivateRoute>,
+                loader: async({params}) => fetch(`http://localhost:5000/products/${params.category_id}`) 
             },
             {
                 path: '/blogs',

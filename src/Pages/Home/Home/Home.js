@@ -1,5 +1,6 @@
 import React from 'react';
 import Title from '../../../Hooks/Title';
+import AllCategories from '../../Categories/AllCategories/AllCategories';
 
 const Home = () => {
 
@@ -7,7 +8,7 @@ const Home = () => {
 
     return (
         <div>
-            
+          <AllCategories></AllCategories>  
         </div>
     );
 };
