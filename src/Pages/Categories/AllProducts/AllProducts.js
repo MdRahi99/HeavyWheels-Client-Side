@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import ProductsModal from '../../ProductsModal/ProductsModal';
 import ProductsDetails from '../ProductsDetails/ProductsDetails';
 
 const AllProducts = () => {
 
     const allProducts = useLoaderData();
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    console.log(selectedProduct)
 
     return (
         <div className='my-12 grid grid-cols-1 gap-8 lg:grid-cols-3'>
@@ -12,7 +15,12 @@ const AllProducts = () => {
                 allProducts.map(products => <ProductsDetails
                     key={products._id}
                     products={products}
+                    setSelectedProduct={setSelectedProduct}
                 ></ProductsDetails>)
+            }
+            {
+                selectedProduct &&
+                <ProductsModal selectedProduct={selectedProduct}></ProductsModal>
             }
         </div>
     );
