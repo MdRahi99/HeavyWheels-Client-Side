@@ -1,60 +1,65 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 import Title from "../../../Hooks/Title";
 import img from "../../../assets/images/register.png";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const Register = () => {
-  Title('Register');
-  const {createUser,providerLogin,updateUser} = useContext(AuthContext);
+  Title("Register");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const { createUser, providerLogin, updateUser } = useContext(AuthContext);
+  const [signUpError, setSignUPError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
 
   const googleProvider = new GoogleAuthProvider();
 
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || "/";
 
-    const handleSignUp = event =>{
-        event.preventDefault();
-        const form = event.target;
-        const name = form.name.value;
-        const photoURL = form.photoURL.value;
-        const email = form.email.value;
-        const password = form.password.value;
+  const handleSignUp = (data) => {
+    console.log(data);
+    const form = data.target;
+    setSignUPError("");
+    createUser(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast("User Created Successfully.");
+        const userInfo = {
+          displayName: data.name,
+        };
+        form.reset();
+        navigate(from, { replace: true });
+        updateUser(userInfo)
+          .then(() => {})
+          .catch((err) => console.log(err));
+      })
+      .catch((error) => {
+        console.log(error);
+        setSignUPError(error.message);
+      });
+  };
 
-        console.log(name, photoURL, email, password);
-        
-        createUser(email, password)
+  const handleGoogleSignIn = () => {
+    providerLogin(googleProvider)
         .then(result => {
             const user = result.user;
             console.log(user);
-            form.reset();
-            handleUpdateUser(name, photoURL);
-            navigate(from, { replace: true });
+            navigate(from, {replace: true});
         })
-        .catch(err => console.error(err));
-    }
-
-    const handleUpdateUser =(name,photoURL)=>{
-      const profile = {
-        displayName: name,
-        photoURL: photoURL
-      }
-      updateUser(profile)
-      .then(()=>{})
-      .catch(error=>console.error(error));
-    }
-
-    const handleGoogleSignIn = () => {
-      providerLogin(googleProvider)
-          .then(result => {
-              const user = result.user;
-              console.log(user);
-              navigate(from, {replace: true});
-          })
-          .catch(error => console.error(error))
-    }
+        .catch(error => {
+          console.log(error);
+          setSignUPError(error.message);
+        })
+  }
 
   return (
     <div>
@@ -63,37 +68,61 @@ const Register = () => {
           <div className="md:w-1/2 px-8 md:px-16">
             <h2 className="font-bold text-2xl text-[#002D74]">Register</h2>
 
-            <form onSubmit={handleSignUp} className="flex flex-col gap-4">
+            <form
+              onSubmit={handleSubmit(handleSignUp)}
+              className="flex flex-col gap-4"
+            >
               <div>
                 <input
                   className="p-2 mt-8 rounded-xl border w-full"
                   type="name"
+                  {...register("name", {
+                    required: "Name is Required",
+                  })}
                   name="name"
                   placeholder="Name"
                   required
                 />
-                <input
-                  className="p-2 mt-4 rounded-xl border w-full"
-                  type="text"
-                  name="photoURL"
-                  placeholder="Photo URL"
-                />
+                {errors.name && (
+                  <p className="text-red-500">{errors.name.message}</p>
+                )}
                 <input
                   className="p-2 mt-4 rounded-xl border w-full"
                   type="email"
+                  {...register("email", {
+                    required: true,
+                  })}
                   name="email"
                   placeholder="Email"
                   required
                 />
+                {errors.email && (
+                  <p className="text-red-500">{errors.email.message}</p>
+                )}
               </div>
               <div className="relative">
                 <input
                   className="p-2 rounded-xl border w-full"
                   type="password"
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be 6 characters long",
+                    },
+                    pattern: {
+                      value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,
+                      message:
+                        "Password must have uppercase, number and special characters",
+                    },
+                  })}
                   name="password"
                   placeholder="Password"
                   required
                 />
+                {errors.password && (
+                  <p className="text-red-500">{errors.password.message}</p>
+                )}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -106,9 +135,9 @@ const Register = () => {
                   <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                 </svg>
               </div>
-              <button className="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300">
-                Register
-              </button>
+        
+              <input className='bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300' value="Sign Up" type="submit" />
+              {signUpError && <p className='text-red-600'>{signUpError}</p>}
             </form>
 
             <div className="mt-6 grid grid-cols-3 items-center text-gray-400">

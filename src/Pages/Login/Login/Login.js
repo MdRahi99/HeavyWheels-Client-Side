@@ -1,52 +1,49 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 import { GoogleAuthProvider } from "firebase/auth";
+import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
 import Title from "../../../Hooks/Title";
 import img from "../../../assets/images/login.png";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
   Title('Login');
-  const { login, providerLogin } = useContext(AuthContext);
-  const [error, setError] = useState("");
+  
+  const { register, formState: { errors }, handleSubmit } = useForm();
+  const { signIn, providerLogin } = useContext(AuthContext);
+  const [loginError, setLoginError] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
 
+  const from = location.state?.from?.pathname || '/';
+
   const googleProvider = new GoogleAuthProvider();
 
-  const from = location.state?.from?.pathname || "/";
-
-  const handleLogin = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const email = form.email.value;
-    const password = form.password.value;
-
-    login(email, password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        form.reset();
-        setError("");
-        navigate(from, { replace: true });
-      })
-      .catch((error) => {
-        console.error(error);
-        setError(error.message);
-      });
-  };
+  const handleLogin = data => {
+      console.log(data);
+      setLoginError('');
+      signIn(data.email, data.password)
+          .then(result => {
+              const user = result.user;
+              console.log(user);
+              navigate(from, {replace: true});
+          })
+          .catch(error => {
+              console.log(error.message)
+              setLoginError(error.message);
+          });
+  }
 
   const handleGoogleSignIn = () => {
     providerLogin(googleProvider)
       .then((result) => {
         const user = result.user;
         console.log(user);
-        setError("");
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        console.error(error);
-        setError(error.message);
+        console.log(error.message)
+        setLoginError(error.message);
       });
   };
 
@@ -56,28 +53,44 @@ const Login = () => {
         <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
           <div className="md:w-1/2 px-8 md:px-16">
             <h2 className="font-bold text-2xl text-[#002D74]">Login</h2>
-            <div>
-              <span>{error}</span>
-            </div>
 
-            <form onSubmit={handleLogin} className="flex flex-col gap-4">
+            <form
+              onSubmit={handleSubmit(handleLogin)}
+              className="flex flex-col gap-4"
+            >
               <div>
                 <input
                   className="p-2 mt-4 rounded-xl border w-full"
                   type="email"
+                  {...register("email", {
+                    required: "Email Address is required",
+                  })}
                   name="email"
                   placeholder="Email"
                   required
                 />
+                {errors.email && (
+                  <p className="text-red-600">{errors.email?.message}</p>
+                )}
               </div>
               <div className="relative">
                 <input
                   className="p-2 rounded-xl border w-full"
                   type="password"
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be 6 characters or longer",
+                    },
+                  })}
                   name="password"
                   placeholder="Password"
                   required
                 />
+                {errors.password && (
+                  <p className="text-red-600">{errors.password?.message}</p>
+                )}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -90,9 +103,11 @@ const Login = () => {
                   <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                 </svg>
               </div>
-              <button className="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300">
-                Login
-              </button>
+              
+              <input className='bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300' value="Login" type="submit" />
+              <div>
+                {loginError && <p className="text-red-600">{loginError}</p>}
+              </div>
             </form>
 
             <div className="mt-6 grid grid-cols-3 items-center text-gray-400">
@@ -101,7 +116,9 @@ const Login = () => {
               <hr className="border-gray-400" />
             </div>
 
-            <button onClick={handleGoogleSignIn} className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-[#002D74]">
+            <button onClick={handleGoogleSignIn}
+              className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-[#002D74]"
+            >
               <svg
                 className="mr-3"
                 xmlns="http://www.w3.org/2000/svg"

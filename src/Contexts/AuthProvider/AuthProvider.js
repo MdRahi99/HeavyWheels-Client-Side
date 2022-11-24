@@ -25,7 +25,7 @@ const AuthProvider = ({children}) => {
         return signInWithPopup(auth, provider);
     }
 
-    const login = (email, password) =>{
+    const signIn = (email, password) =>{
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
@@ -51,7 +51,7 @@ const AuthProvider = ({children}) => {
         loading,
         createUser, 
         providerLogin,
-        login, 
+        signIn, 
         logOut,
         updateUser
     }
