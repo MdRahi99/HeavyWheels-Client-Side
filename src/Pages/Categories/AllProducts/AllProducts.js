@@ -7,7 +7,6 @@ const AllProducts = () => {
 
     const allProducts = useLoaderData();
     const [selectedProduct, setSelectedProduct] = useState(null);
-    console.log(selectedProduct)
 
     return (
         <div className='my-12 grid grid-cols-1 gap-8 lg:grid-cols-3'>
@@ -20,7 +19,10 @@ const AllProducts = () => {
             }
             {
                 selectedProduct &&
-                <ProductsModal selectedProduct={selectedProduct}></ProductsModal>
+                <ProductsModal 
+                selectedProduct={selectedProduct}
+                setSelectedProduct={setSelectedProduct}
+                ></ProductsModal>
             }
         </div>
     );

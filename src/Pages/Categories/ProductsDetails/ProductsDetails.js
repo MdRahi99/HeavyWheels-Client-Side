@@ -1,7 +1,9 @@
 import React from "react";
+import Title from "../../../Hooks/Title";
 
 const ProductsDetails = ({ products, setSelectedProduct }) => {
 
+  Title('Products');
   const {
     name,
     location,
