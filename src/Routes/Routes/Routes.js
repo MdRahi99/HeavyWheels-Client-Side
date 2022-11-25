@@ -3,6 +3,7 @@ import Main from "../../Layout/Main";
 import AllCategories from "../../Pages/Categories/AllCategories/AllCategories";
 import Home from "../../Pages/Home/Home/Home";
 import Blogs from "../../Pages/Blogs/Blogs";
+import ErrorRoute from "../../Routes/ErrorRoute/ErrorRoute";
 import Login from "../../Pages/Login/Login/Login";
 import Register from "../../Pages/Login/Register/Register";
 import Contact from "../../Pages/Contact/Contact";
@@ -98,6 +99,10 @@ const router = createBrowserRouter([
             },
             // Admin Section Routes
         ]
+    },
+    {
+        path: '*',
+        element: <ErrorRoute></ErrorRoute>
     }
 ])
 
