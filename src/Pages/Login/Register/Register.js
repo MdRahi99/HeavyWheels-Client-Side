@@ -6,7 +6,7 @@ import Title from "../../../Hooks/Title";
 import img from "../../../assets/images/register.png";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import useToken from '../../../Hooks/useToken';
+import useToken from "../../../Hooks/useToken";
 
 const Register = () => {
   Title("Register");
@@ -20,7 +20,7 @@ const Register = () => {
   const { createUser, providerLogin, updateUser } = useContext(AuthContext);
   const [signUpError, setSignUPError] = useState("");
   const location = useLocation();
-  const [createdUserEmail, setCreatedUserEmail] = useState('')
+  const [createdUserEmail, setCreatedUserEmail] = useState("");
   const [token] = useToken(createdUserEmail);
   const navigate = useNavigate();
 
@@ -42,7 +42,7 @@ const Register = () => {
         const userInfo = {
           displayName: data.name,
         };
-        navigate(from, { replace: true });
+
         updateUser(userInfo)
           .then(() => {
             saveUser(data.name, data.email);
