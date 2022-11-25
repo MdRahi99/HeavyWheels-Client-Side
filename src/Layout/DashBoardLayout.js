@@ -21,6 +21,7 @@ const DashboardLayout = () => {
           <ul className="menu p-4 w-80 text-base-content">
             <li>
               <Link to="/dashboard/myOrders">All Orders</Link>
+              <Link to="/dashboard/allUsers">All Users</Link>
             </li>
           </ul>
         </div>
