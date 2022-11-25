@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
-const ProductsModal = ({ selectedProduct, setSelectedProduct, refetch }) => {
+const ProductsModal = ({ selectedProduct, setSelectedProduct }) => {
   const { user } = useContext(AuthContext);
   const { name, resale_price } = selectedProduct;
 
@@ -25,7 +25,7 @@ const ProductsModal = ({ selectedProduct, setSelectedProduct, refetch }) => {
       place
     };
 
-    fetch("http://localhost:5000/myOrders", {
+    fetch("http://localhost:5000/orders", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -38,7 +38,6 @@ const ProductsModal = ({ selectedProduct, setSelectedProduct, refetch }) => {
         if (data.acknowledged) {
           setSelectedProduct(null);
           toast.success("Order confirmed");
-          refetch();
         } else {
           toast.error(data.message);
         }
