@@ -45,7 +45,7 @@ const Register = () => {
 
         updateUser(userInfo)
           .then(() => {
-            saveUser(data.name, data.email);
+            saveUser(data.name, data.email, data.role);
           })
           .catch((err) => console.log(err));
       })
@@ -55,8 +55,8 @@ const Register = () => {
       });
   };
 
-  const saveUser = (name, email) => {
-    const user = { name, email };
+  const saveUser = (name, email, role) => {
+    const user = { name, email, role };
     fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
@@ -94,9 +94,22 @@ const Register = () => {
               onSubmit={handleSubmit(handleSignUp)}
               className="flex flex-col gap-4"
             >
+              <div className="">
+                <select
+                className="p-2 mt-8 rounded-xl border w-full"
+                  type="text"
+                  name="role"
+                  {...register("role", {
+                    required: "Choose one",
+                  })}
+                >
+                  <option>buyer</option>
+                  <option>seller</option>
+                </select>
+              </div>
               <div>
                 <input
-                  className="p-2 mt-8 rounded-xl border w-full"
+                  className="p-2 mt-2 rounded-xl border w-full"
                   type="name"
                   {...register("name", {
                     required: "Name is Required",

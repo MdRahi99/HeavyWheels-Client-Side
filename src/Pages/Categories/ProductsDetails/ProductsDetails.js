@@ -41,7 +41,7 @@ const ProductsDetails = ({ products, setSelectedProduct }) => {
               onClick={() => setSelectedProduct(products)}
               className="btn btn-success hover:bg-green-800 hover:text-slate-200"
             >
-              Click
+              Select
             </label>
           </div>
         </div>

@@ -10,11 +10,19 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import DashboardLayout from "../../Layout/DashBoardLayout";
 
 import AllProducts from "../../Pages/Categories/AllProducts/AllProducts";
+
 import MyOrders from "../../Pages/Dashboard/BuyerDashboard/MyOrders/MyOrders";
+
+import MyBuyers from "../../Pages/Dashboard/SellerDashboard/MyBuyers/MyBuyers";
+import MyProducts from "../../Pages/Dashboard/SellerDashboard/MyProducts/MyProducts";
+import AddProducts from "../../Pages/Dashboard/SellerDashboard/AddProducts/AddProducts";
+
 import AllBuyers from "../../Pages/Dashboard/AdminDashboard/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/Dashboard/AdminDashboard/AllSellers/AllSellers";
 import ReportedItems from "../../Pages/Dashboard/AdminDashboard/ReportedItems/ReportedItems";
+
 import AdminRoute from "../AdminRoute/AdminRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
 
 const router = createBrowserRouter([
     {
@@ -60,6 +68,22 @@ const router = createBrowserRouter([
                 path: '/dashboard/myOrders',
                 element: <MyOrders></MyOrders>
             },
+            // Seller Section Routes
+            {
+                path: '/dashboard/myBuyers',
+                element: <SellerRoute><MyBuyers></MyBuyers></SellerRoute>
+            },
+            {
+                path: '/dashboard/myProducts',
+                element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
+            },
+            {
+                path: '/dashboard/addProducts',
+                element: <SellerRoute><AddProducts></AddProducts></SellerRoute>
+            },
+            // Buyer Section Routes
+
+            // Admin Section Routes
             {
                 path: '/dashboard/allBuyers',
                 element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
@@ -72,6 +96,7 @@ const router = createBrowserRouter([
                 path: '/dashboard/reportedItems',
                 element: <AdminRoute><ReportedItems></ReportedItems></AdminRoute>
             },
+            // Admin Section Routes
         ]
     }
 ])
