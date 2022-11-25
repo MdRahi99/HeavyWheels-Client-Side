@@ -1,5 +1,6 @@
 import React from 'react';
 import Title from '../../../Hooks/Title';
+import Blogs from '../../Blogs/Blogs';
 import AllCategories from '../../Categories/AllCategories/AllCategories';
 import Banner from '../Banner/Banner';
 import Reviews from '../Reviews/Reviews';
@@ -13,6 +14,7 @@ const Home = () => {
           <Banner></Banner>
           <AllCategories></AllCategories>
           <Reviews></Reviews>  
+          <Blogs></Blogs>
         </div>
     );
 };

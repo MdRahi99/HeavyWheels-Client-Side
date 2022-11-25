@@ -18,7 +18,7 @@ const Banner = () => {
           <div className="flex flex-row gap-2 align-items-center justify-center">
             <Link
               to="/categories"
-              className="px-4 py-2 bg-orange-400 hover:bg-orange-600 text-slate-900 font-bold rounded"
+              className="px-4 py-2 bg-slate-900 hover:bg-slate-700 text-slate-200 font-bold rounded"
             >
               Explore 
             </Link>

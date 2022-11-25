@@ -18,10 +18,10 @@ const ProductsDetails = ({ products, setSelectedProduct }) => {
   return (
     <div>
       <div className="card bg-base-100 shadow-lg">
-        <figure className="px-4 h-60 w-full py-4">
+        <figure className="px-4 my-4 h-60 w-full py-4">
           <img src={img} alt="img" className="rounded" />
         </figure>
-        <div className="card-body h-96">
+        <div className="card-body h-96 bg-slate-300 mx-3 mb-3">
           <h2 className="card-title">{name}</h2>
           <p>{location}</p>
           <p>Years of Use: {years_of_use}</p>
@@ -39,7 +39,7 @@ const ProductsDetails = ({ products, setSelectedProduct }) => {
             <label
               htmlFor="selected-modal"
               onClick={() => setSelectedProduct(products)}
-              className="btn btn-success hover:bg-green-800 hover:text-slate-200"
+              className="btn bg-slate-900 hover:bg-slate-700 hover:text-slate-200"
             >
               Select
             </label>

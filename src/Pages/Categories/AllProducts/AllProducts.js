@@ -9,7 +9,7 @@ const AllProducts = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);
 
     return (
-        <div className='my-12 grid grid-cols-1 gap-8 lg:grid-cols-3'>
+        <div className='my-12 grid grid-cols-1 bg-base-200 p-8 gap-8 lg:grid-cols-3'>
             {
                 allProducts.map(products => <ProductsDetails
                     key={products._id}

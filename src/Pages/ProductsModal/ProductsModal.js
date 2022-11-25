@@ -100,7 +100,7 @@ const ProductsModal = ({ selectedProduct, setSelectedProduct }) => {
             />
             <br />
             <input
-              className="btn btn-success hover:bg-green-800 hover:text-slate-200"
+              className="btn bg-slate-900 hover:bg-slate-700 hover:text-slate-200"
               type="submit"
               value="Submit"
             />
