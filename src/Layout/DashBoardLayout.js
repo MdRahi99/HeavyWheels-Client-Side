@@ -23,9 +23,9 @@ const DashboardLayout = () => {
         <div className="drawer-content">
           <Outlet></Outlet>
         </div>
-        <div className="drawer-side">
-          <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 text-base-content">
+        <div className="drawer-side my-12">
+          <label htmlFor="dashboard-drawer" className="drawer-toggle"></label>
+          <ul className="menu px-4 w-80 font-bold text-xl">
             {!isAdmin && !isSeller && (
               <div>
                 <li>

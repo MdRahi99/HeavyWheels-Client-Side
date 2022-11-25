@@ -23,16 +23,16 @@ const MyOrders = () => {
   });
 
   return (
-    <div>
-      <h3 className="text-3xl mb-5">My Orders</h3>
+    <div className="bg-slate-900 p-4 my-12 mx-4">
+      <h3 className="text-3xl my-8 text-slate-200 text-center">My Orders</h3>
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
-            <tr>
+            <tr className="hover">
               <th>No.</th>
               <th>Name</th>
               <th>Location</th>
-              <th>resalePrice</th>
+              <th>Price</th>
               <th>Status</th>
             </tr>
           </thead>
