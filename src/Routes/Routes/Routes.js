@@ -11,7 +11,10 @@ import DashboardLayout from "../../Layout/DashBoardLayout";
 
 import AllProducts from "../../Pages/Categories/AllProducts/AllProducts";
 import MyOrders from "../../Pages/Dashboard/BuyerDashboard/MyOrders/MyOrders";
-import AllUsers from "../../Pages/Dashboard/AdminDashboard/AllUsers/AllUsers";
+import AllBuyers from "../../Pages/Dashboard/AdminDashboard/AllBuyers/AllBuyers";
+import AllSellers from "../../Pages/Dashboard/AdminDashboard/AllSellers/AllSellers";
+import ReportedItems from "../../Pages/Dashboard/AdminDashboard/ReportedItems/ReportedItems";
+import AdminRoute from "../AdminRoute/AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -58,9 +61,17 @@ const router = createBrowserRouter([
                 element: <MyOrders></MyOrders>
             },
             {
-                path: '/dashboard/allUsers',
-                element: <AllUsers></AllUsers>
-            }
+                path: '/dashboard/allBuyers',
+                element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
+            },
+            {
+                path: '/dashboard/allSellers',
+                element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
+            },
+            {
+                path: '/dashboard/reportedItems',
+                element: <AdminRoute><ReportedItems></ReportedItems></AdminRoute>
+            },
         ]
     }
 ])
