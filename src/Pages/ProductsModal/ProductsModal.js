@@ -4,7 +4,7 @@ import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const ProductsModal = ({ selectedProduct, setSelectedProduct }) => {
   const { user } = useContext(AuthContext);
-  const { name, resale_price } = selectedProduct;
+  const { name, price } = selectedProduct;
 
   const handleSelectedProduct = (event) => {
     event.preventDefault();
@@ -82,7 +82,7 @@ const ProductsModal = ({ selectedProduct, setSelectedProduct }) => {
             <input
               name="resalePrice"
               type="text"
-              value={resale_price}
+              value={price}
               disabled
               className="input w-full input-bordered"
             />

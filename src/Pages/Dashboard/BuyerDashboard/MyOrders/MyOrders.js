@@ -18,6 +18,7 @@ const MyOrders = () => {
         },
       });
       const data = await res.json();;
+      console.log(data);
       return data;
     },
   });
@@ -43,7 +44,7 @@ const MyOrders = () => {
                 <td>{orders.itemName}</td>
                 <td>{orders.place}</td>
                 <td>{orders.resalePrice}</td>
-                <td>{orders.status}</td>
+                <td>Pay</td>
               </tr>
             ))}
           </tbody>
