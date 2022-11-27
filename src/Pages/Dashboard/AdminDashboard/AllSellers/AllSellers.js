@@ -67,8 +67,8 @@ const AllSellers = () => {
     return <Loading></Loading>;
   }
   return (
-    <div className="my-10">
-      <h2 className="text-2xl text-slate-200 bg-slate-900 p-3 my-4 text-center">All Sellers</h2>
+    <div className="bg-slate-900 p-4 my-12 mx-4">
+      <h2 className="text-3xl my-8 text-slate-200 text-center">All Sellers</h2>
 
       <div className="overflow-x-auto">
         <table className="table w-full">
