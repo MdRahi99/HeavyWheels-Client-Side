@@ -25,10 +25,14 @@ import ReportedItems from "../../Pages/Dashboard/AdminDashboard/ReportedItems/Re
 import AdminRoute from "../AdminRoute/AdminRoute";
 import SellerRoute from "../SellerRoute/SellerRoute";
 
+import Payment from "../../Pages/Dashboard/BuyerDashboard/MyOrders/Payment/Payment";
+import DisplayError from "../../Pages/Shared/DisplayError/DisplayError";
+
 const router = createBrowserRouter([
     {
         path: '/',
         element: <Main></Main>,
+        errorElement: <DisplayError></DisplayError>,
         children: [
             {
                 path: '/',
@@ -64,10 +68,17 @@ const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        errorElement: <DisplayError></DisplayError>,
         children: [
             {
                 path: '/dashboard/myOrders',
                 element: <MyOrders></MyOrders>
+            },
+            // Payment
+            {
+                path: '/dashboard/payment/:id',
+                element: <Payment></Payment>,
+                loader: ({params}) => fetch(`http://localhost:5000/orders/${params.id}`)
             },
             // Seller Section Routes
             {
@@ -96,7 +107,7 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/reportedItems',
                 element: <AdminRoute><ReportedItems></ReportedItems></AdminRoute>
-            },
+            }
             // Admin Section Routes
         ]
     },

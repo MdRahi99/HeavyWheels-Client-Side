@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../../../Contexts/AuthProvider/AuthProvider";
 import Title from "../../../../Hooks/Title";
 
@@ -17,8 +18,7 @@ const MyOrders = () => {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },
       });
-      const data = await res.json();;
-      console.log(data);
+      const data = await res.json();
       return data;
     },
   });
@@ -44,7 +44,17 @@ const MyOrders = () => {
                 <td>{orders.itemName}</td>
                 <td>{orders.place}</td>
                 <td>{orders.resalePrice}</td>
-                <td><button>Pay</button></td>
+                <td>
+                  {orders.resalePrice && !orders.paid && (
+                    <Link to={`/dashboard/payment/${orders._id}`}>
+                      <button className="btn btn-info btn-sm">Pay</button>
+                    </Link>
+                  )}
+
+                  {orders.resalePrice && orders.paid && (
+                      <span className="bg-slate-900 text-slate-200 p-2 rounded">Paid</span>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
