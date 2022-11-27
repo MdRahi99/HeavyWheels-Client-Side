@@ -44,7 +44,7 @@ const MyOrders = () => {
                 <td>{orders.itemName}</td>
                 <td>{orders.place}</td>
                 <td>{orders.resalePrice}</td>
-                <td>Pay</td>
+                <td><button>Pay</button></td>
               </tr>
             ))}
           </tbody>

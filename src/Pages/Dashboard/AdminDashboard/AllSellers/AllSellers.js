@@ -31,7 +31,6 @@ const AllSellers = () => {
   });
 
   const handleDeleteUser = (user) => {
-    console.log(user);
 
     fetch(`http://localhost:5000/users/${user._id}`, {
       method: "DELETE",
@@ -47,6 +46,23 @@ const AllSellers = () => {
         }
       });
   };
+
+  const handleVerifySeller = id => {
+    fetch(`http://localhost:5000/users/admin/${id}`, {
+        method: 'PUT', 
+        headers: {
+            authorization: `bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.modifiedCount > 0){
+            toast.success('Verified successful.')
+            refetch();
+        }
+    })
+}
+
   if (isLoading) {
     return <Loading></Loading>;
   }
@@ -61,7 +77,7 @@ const AllSellers = () => {
               <th></th>
               <th>Name</th>
               <th>Email</th>
-
+              <th>Status</th>
               <th>Delete</th>
             </tr>
           </thead>
@@ -74,7 +90,8 @@ const AllSellers = () => {
                     <h3 className="bg-sky-600 p-1 rounded font-bold text-slate-200">{user.role}</h3>
                 </td>
                 <td>{user.email}</td>
-
+                <td>{user?.status !=='verified' ? <button onClick={()=>handleVerifySeller(user._id)} className='btn btn-info btn-xs'>Verify</button>: <div className="badge badge-success gap-2">{user?.status}</div> }
+                </td>
                 <td>
                   {" "}
                   <label
