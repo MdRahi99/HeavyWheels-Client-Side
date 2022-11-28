@@ -39,7 +39,7 @@ const AddProducts = () => {
         purchaseYear,
         description
     };
-    fetch("http://localhost:5000/addProduct", {
+    fetch("https://heavy-wheels-server.vercel.app/addProduct", {
       method: "POST",
       headers: {
         "content-type": "application/json",

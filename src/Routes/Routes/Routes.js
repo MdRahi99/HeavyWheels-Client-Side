@@ -45,7 +45,7 @@ const router = createBrowserRouter([
             {
                 path: '/products/:category_id',
                 element: <PrivateRoute><AllProducts></AllProducts></PrivateRoute>,
-                loader: async({params}) => fetch(`http://localhost:5000/products/${params.category_id}`) 
+                loader: async({params}) => fetch(`https://heavy-wheels-server.vercel.app/products/${params.category_id}`) 
             },
             {
                 path: '/blogs',
@@ -78,7 +78,7 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <Payment></Payment>,
-                loader: ({params}) => fetch(`http://localhost:5000/orders/${params.id}`)
+                loader: ({params}) => fetch(`https://heavy-wheels-server.vercel.app/orders/${params.id}`)
             },
             // Seller Section Routes
             {

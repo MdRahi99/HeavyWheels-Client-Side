@@ -19,7 +19,7 @@ const AllBuyers = () => {
     queryKey: ["users"],
     queryFn: async () => {
       try {
-        const res = await fetch("http://localhost:5000/users/buyer", {
+        const res = await fetch("https://heavy-wheels-server.vercel.app/users/buyer", {
           headers: {
             authorization: `bearer ${localStorage.getItem("accessToken")}`,
           },
@@ -33,7 +33,7 @@ const AllBuyers = () => {
   const handleDeleteUser = (user) => {
     console.log(user);
 
-    fetch(`http://localhost:5000/users/${user._id}`, {
+    fetch(`https://heavy-wheels-server.vercel.app/users/${user._id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,

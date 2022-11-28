@@ -6,7 +6,7 @@ const AdvertisedProduct = () => {
   const [adsStatus, setAdsStatus] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/addProduct/seller/advertised")
+    fetch("https://heavy-wheels-server.vercel.app/addProduct/seller/advertised")
       .then((res) => res.json())
       .then((data) => setAdsStatus(data));
   }, []);

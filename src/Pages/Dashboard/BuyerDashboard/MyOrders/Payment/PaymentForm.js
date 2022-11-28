@@ -13,7 +13,7 @@ const PaymentForm = ({ orders }) => {
     const { resalePrice, email, name, _id } = orders;
 
     useEffect(() => {
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://heavy-wheels-server.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -77,7 +77,7 @@ const PaymentForm = ({ orders }) => {
                 email,
                 ordersId: _id
             }
-            fetch('http://localhost:5000/payments', {
+            fetch('https://heavy-wheels-server.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
