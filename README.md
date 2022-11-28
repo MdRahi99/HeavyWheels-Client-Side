@@ -7,10 +7,11 @@
 - Admin also can verify seller
 - Seller can advertise products
 
-### Funtionalities Used:
+### Used Technologies:
 - Html
 - Css
 - Tailwind CSS
+- DaisyUI
 - JavaScript
 - React
 - Node JS
