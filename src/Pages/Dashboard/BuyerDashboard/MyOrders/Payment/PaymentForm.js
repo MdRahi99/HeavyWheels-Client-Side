@@ -127,9 +127,9 @@ const PaymentForm = ({ orders }) => {
             </form>
             <p className="text-red-500">{cardError}</p>
             {
-                success && <div>
-                    <p className='text-slate-200'>{success}</p>
-                    <p>Your transactionId: <span className='font-bold'>{transactionId}</span></p>
+                success && <div className='my-4'>
+                    <p className='text-green-600 text-2xl'>{success}</p>
+                    <p className='text-xl mt-4'>Your Transaction Id: <br /><br /> <span className='font-bold bg-slate-300 text-slate-800 p-2'>{transactionId}</span></p>
                 </div>
             }
         </div>
