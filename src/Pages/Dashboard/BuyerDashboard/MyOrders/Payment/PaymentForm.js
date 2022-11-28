@@ -100,8 +100,8 @@ const PaymentForm = ({ orders }) => {
     }
 
     return (
-        <>
-            <form className='bg-slate-800 p-4' onSubmit={handleSubmit}>
+        <div className=''>
+            <form className='bg-slate-500 p-4' onSubmit={handleSubmit}>
                 <CardElement
                     options={{
                         style: {
@@ -128,11 +128,11 @@ const PaymentForm = ({ orders }) => {
             <p className="text-red-500">{cardError}</p>
             {
                 success && <div>
-                    <p className='text-green-500'>{success}</p>
+                    <p className='text-slate-200'>{success}</p>
                     <p>Your transactionId: <span className='font-bold'>{transactionId}</span></p>
                 </div>
             }
-        </>
+        </div>
     );
 };
 
