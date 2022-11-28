@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { FaAngleDoubleRight } from 'react-icons/fa';
 import { UserIcon } from '@heroicons/react/24/solid';
 import logo from "../../../assets/images/logo.png";
 import { AuthContext } from "../../../Contexts/AuthProvider/AuthProvider";
@@ -72,7 +73,7 @@ const Navbar = () => {
         {user?.uid ? (
           <div className="flex gap-2 items-center">
             <img className="h-8" src={user?.photoURL} alt="" />
-            <p>{user.displayName}</p>
+            <p className="bg-slate-900 text-slate-200 p-2">{user.displayName}</p>
           </div>
         ) : (
           <Link to="/login" className="btn">
@@ -81,6 +82,9 @@ const Navbar = () => {
           </Link>
         )}
       </div>
+      <label htmlFor="dashboard-drawer"  tabIndex={2} className="btn btn-ghost lg:hidden">
+            <FaAngleDoubleRight className="text-2xl"></FaAngleDoubleRight>
+      </label>
     </div>
   );
 };

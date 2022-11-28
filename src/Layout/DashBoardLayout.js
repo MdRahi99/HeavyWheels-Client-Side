@@ -10,7 +10,6 @@ const DashboardLayout = () => {
   const [isAdmin] = useAdmin(user?.email);
   const [isSeller] = useSeller(user?.email);
 
-  <Navbar></Navbar>;
   return (
     <div>
       <Navbar></Navbar>
@@ -24,34 +23,34 @@ const DashboardLayout = () => {
           <Outlet></Outlet>
         </div>
         <div className="drawer-side my-12">
-          <label htmlFor="dashboard-drawer" className="drawer-toggle"></label>
-          <ul className="menu px-4 w-80 font-bold text-xl">
+          <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
+          <ul className="menu px-4 w-80 font-bold text-xl bg-slate-900 text-slate-200">
             {!isAdmin && !isSeller && (
-              <div>
+              <div className="p-4 flex flex-col gap-4">
                 <li>
-                  <Link to="/dashboard/myOrders">All Orders</Link>
+                  <Link className="bg-slate-600 my-4" to="/dashboard/myOrders">All Orders</Link>
                 </li>
               </div>
             )}
             {!isAdmin && isSeller && (
-              <div>
+              <div className="p-4 flex flex-col gap-4 my-4">
                 <li>
-                  <Link to="/dashboard/myBuyers">My Buyers</Link>
-                  <Link to="/dashboard/myProducts">My Products</Link>
-                  <Link to="/dashboard/addProducts">Add a Product</Link>
+                  <Link className="bg-slate-600 my-4" to="/dashboard/myBuyers">My Buyers</Link>
+                  <Link className="bg-slate-600 mb-4" to="/dashboard/myProducts">My Products</Link>
+                  <Link className="bg-slate-600" to="/dashboard/addProducts">Add a Product</Link>
                 </li>
               </div>
             )}
             {isAdmin && (
               <div className="p-4 flex flex-col gap-4">
                 <li>
-                  <Link to="/dashboard/allBuyers">All Buyers</Link>
+                  <Link className="bg-slate-600 my-4" to="/dashboard/allBuyers">All Buyers</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/allSellers">All Sellers</Link>
+                  <Link className="bg-slate-600 my-4" to="/dashboard/allSellers">All Sellers</Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/reportedItems">Reported Items</Link>
+                  <Link className="bg-slate-600 my-4" to="/dashboard/reportedItems">Reported Items</Link>
                 </li>
               </div>
             )}
