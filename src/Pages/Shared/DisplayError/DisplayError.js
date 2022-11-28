@@ -16,10 +16,10 @@ const DisplayError = () => {
     }
 
     return (
-        <div className='bg-slate-300 p-4'>
-            <p className='text-red-500 bg-slate-400 p-2'>Something went wrong!!!</p>
-            <p className='text-red-400 bg-slate-400 p-2'>{error.statusText || error.message}</p>
-            <h4 className="text-3xl bg-slate-400 p-2"> Please <button onClick={handleLogOut}>Sign out</button> and log back in</h4>
+        <div className='bg-slate-300 p-10 my-40 text-center'>
+            <p className='text-red-500 bg-slate-800 p-8'>Something went wrong!!!</p>
+            <p className='text-red-400 bg-slate-800 p-8'>{error.statusText || error.message}</p>
+            <h4 className="text-3xl bg-slate-800 text-slate-200 p-8"> Please <button className='btn btn-info hover:bg-success' onClick={handleLogOut}>Sign out</button> and log back in</h4>
         </div>
     );
 };
