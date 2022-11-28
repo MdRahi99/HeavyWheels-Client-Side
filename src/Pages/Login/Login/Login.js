@@ -6,6 +6,7 @@ import Title from "../../../Hooks/Title";
 import img from "../../../assets/images/login.png";
 import { useForm } from "react-hook-form";
 import useToken from "../../../Hooks/useToken";
+import toast from "react-hot-toast";
 
 const Login = () => {
   Title('Login');
@@ -34,6 +35,7 @@ const Login = () => {
               const user = result.user;
               console.log(user);
               setLoginUserEmail(data.email);
+              toast.success('Login Successful')
           })
           .catch(error => {
               console.log(error.message)
