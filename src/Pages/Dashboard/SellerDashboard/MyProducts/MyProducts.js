@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../../../Contexts/AuthProvider/AuthProvider";
 import Title from "../../../../Hooks/Title";
 import ConfirmationModal from "../../../Shared/ConfirmationModal/ConfirmationModal";
@@ -24,7 +25,7 @@ const MyProducts = () => {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },
       });
-      const data = await res.json();;
+      const data = await res.json();
       return data;
     },
   });
@@ -41,6 +42,22 @@ const MyProducts = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.deletedCount > 0) {
+          refetch();
+        }
+      });
+  };
+
+  const handleAdsProduct = (id) => {
+    fetch(`http://localhost:5000/addProduct/seller/${id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("Advertise successful.");
           refetch();
         }
       });
@@ -93,12 +110,10 @@ const MyProducts = () => {
                 >
                   Delete
                 </label>
-                <label
-                  htmlFor="selected-modal"
-                  className="btn bg-slate-900 hover:bg-slate-700 hover:text-slate-200"
-                >
-                  Advertise
-                </label>
+                <div
+                  className="p-3 text-slate-200 rounded bg-slate-900">
+                  {product?.adsStatus !=='advertised' ? <button className="hover:bg-slate-700 hover:text-slate-200" onClick={()=>handleAdsProduct(product._id)}>Advertise</button>: <div className="uppercase">{product?.adsStatus}</div> }
+                </div>
               </div>
             </div>
           </div>)

@@ -31,7 +31,6 @@ const AllSellers = () => {
   });
 
   const handleDeleteUser = (user) => {
-
     fetch(`http://localhost:5000/users/${user._id}`, {
       method: "DELETE",
       headers: {
@@ -47,21 +46,21 @@ const AllSellers = () => {
       });
   };
 
-  const handleVerifySeller = id => {
+  const handleVerifySeller = (id) => {
     fetch(`http://localhost:5000/users/admin/${id}`, {
-        method: 'PUT', 
-        headers: {
-            authorization: `bearer ${localStorage.getItem('accessToken')}`
-        }
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
-    .then(res => res.json())
-    .then(data => {
-        if(data.modifiedCount > 0){
-            toast.success('Verified successful.')
-            refetch();
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("Verified successful.");
+          refetch();
         }
-    })
-}
+      });
+  };
 
   if (isLoading) {
     return <Loading></Loading>;
@@ -86,11 +85,25 @@ const AllSellers = () => {
               <tr key={user._id}>
                 <th>{i + 1}</th>
                 <td className="flex flex-row gap-2 items-center">
-                    <h1 className="text-xl font-bold">{user.name}{" "}</h1>
-                    <h3 className="bg-sky-600 p-1 rounded font-bold text-slate-200">{user.role}</h3>
+                  <h1 className="text-xl font-bold">{user.name} </h1>
+                  <h3 className="bg-sky-600 p-1 rounded font-bold text-slate-200">
+                    {user.role}
+                  </h3>
                 </td>
                 <td>{user.email}</td>
-                <td>{user?.status !=='verified' ? <button onClick={()=>handleVerifySeller(user._id)} className='btn btn-info btn-xs'>Verify</button>: <div className="badge badge-success gap-2">{user?.status}</div> }
+                <td>
+                  {user?.status !== "verified" ? (
+                    <button
+                      onClick={() => handleVerifySeller(user._id)}
+                      className="btn btn-info btn-xs"
+                    >
+                      Verify
+                    </button>
+                  ) : (
+                    <div className="badge badge-success gap-2">
+                      {user?.status}
+                    </div>
+                  )}
                 </td>
                 <td>
                   {" "}
@@ -108,14 +121,13 @@ const AllSellers = () => {
         </table>
       </div>
       {deleteUser && (
-        <ConfirmationModal 
-        name={`Are you sure you want to delete ?`}
-        message={`Deleting ${deleteUser.name} will be lost forever`}
-        cancelModal = {cancelModal}
-        successDelete={handleDeleteUser}
-        modalInfo = {deleteUser}
-        >  
-        </ConfirmationModal>
+        <ConfirmationModal
+          name={`Are you sure you want to delete ?`}
+          message={`Deleting ${deleteUser.name} will be lost forever`}
+          cancelModal={cancelModal}
+          successDelete={handleDeleteUser}
+          modalInfo={deleteUser}
+        ></ConfirmationModal>
       )}
     </div>
   );
