@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../../Layout/Main";
 import AllCategories from "../../Pages/Categories/AllCategories/AllCategories";
 import Home from "../../Pages/Home/Home/Home";
-import Blogs from "../../Pages/Blogs/Blogs";
 import ErrorRoute from "../../Routes/ErrorRoute/ErrorRoute";
 import Login from "../../Pages/Login/Login/Login";
 import Register from "../../Pages/Login/Register/Register";
@@ -46,10 +45,6 @@ const router = createBrowserRouter([
                 path: '/products/:category_id',
                 element: <PrivateRoute><AllProducts></AllProducts></PrivateRoute>,
                 loader: async({params}) => fetch(`https://heavy-wheels-server.vercel.app/products/${params.category_id}`) 
-            },
-            {
-                path: '/blogs',
-                element: <Blogs></Blogs>
             },
             {
                 path: '/contact',
