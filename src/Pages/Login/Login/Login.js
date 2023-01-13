@@ -76,6 +76,7 @@ const Login = () => {
                   })}
                   name="email"
                   placeholder="Email"
+                  defaultValue="admin@gmail.com"
                   required
                 />
                 {errors.email && (
@@ -95,6 +96,7 @@ const Login = () => {
                   })}
                   name="password"
                   placeholder="Password"
+                  defaultValue="admin10A#"
                   required
                 />
                 {errors.password && (
