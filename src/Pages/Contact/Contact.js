@@ -7,7 +7,7 @@ import Title from "../../Hooks/Title";
 const Contact = () => {
   Title('Contact');
   return (
-    <div className="my-12 grid grid-cols-1 lg:grid-cols-2 gap-2 justify-items-end items-center shadow-lg bg-gray-400 p-12 rounded text-slate-200">
+    <div className="my-12 grid grid-cols-1 lg:grid-cols-2 gap-2 justify-items-end items-center shadow-lg bg-base-200 p-12 rounded text-slate-200">
       <div className="divide-y-4 divide-double divide-slate-400/[.60] shadow-lg bg-slate-700 p-8 rounded">
         <div className="">
           <h1 className="text-4xl my-6">Let's Contact Us</h1>
