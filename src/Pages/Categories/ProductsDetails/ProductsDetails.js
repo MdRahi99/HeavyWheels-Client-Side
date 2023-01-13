@@ -19,7 +19,7 @@ const ProductsDetails = ({ products, setSelectedProduct }) => {
 
   return (
     <div>
-      <div className="card bg-slate-900 shadow-lg">
+      <div className="card bg-slate-900 shadow-lg h-full">
         <figure className="px-2 mt-2 h-60 w-full py-4">
           <img src={img} alt="img" className="rounded" />
         </figure>
@@ -28,7 +28,7 @@ const ProductsDetails = ({ products, setSelectedProduct }) => {
             Product Name:{" "}
             <span className="text-orange-600 font-bold">{name}</span>
           </h2>
-          <div className="flex flex-col lg:flex-row gap-2 mt-2 mb-2 bg-base-100 p-4 rounded">
+          <div className="flex flex-col lg:h-20 lg:flex-row gap-2 mt-2 mb-2 bg-base-100 p-4 rounded">
             <p>
               Location:{" "}
               <span className="text-orange-600 font-bold">{location}</span>
@@ -42,7 +42,7 @@ const ProductsDetails = ({ products, setSelectedProduct }) => {
               <span className="text-orange-600 font-bold">{condition}</span>
             </p>
           </div>
-          <div className="flex flex-col lg:flex-row gap-2 mb-2 bg-base-100 p-4 rounded">
+          <div className="flex flex-col lg:h-20 lg:flex-row gap-2 mb-2 bg-base-100 p-4 rounded">
             <p>
               Seller:{" "}
               <span className="text-orange-600 font-bold">{seller}</span>
@@ -56,7 +56,7 @@ const ProductsDetails = ({ products, setSelectedProduct }) => {
               <span className="text-orange-600 font-bold">{posted_time}</span>
             </p>
           </div>
-          <div className="flex flex-col lg:flex-row gap-2 mb-2 bg-base-100 p-4 rounded">
+          <div className="flex flex-col lg:h-20 lg:flex-row gap-2 mb-2 bg-base-100 p-4 rounded">
             <p>
               Orginal Price:
               <span className="text-orange-600 text-xl font-bold">
@@ -68,7 +68,7 @@ const ProductsDetails = ({ products, setSelectedProduct }) => {
               <span className="text-orange-600 text-xl font-bold">{price}</span>
             </p>
           </div>
-          <div className="mb-2 bg-base-100 p-4 rounded">
+          <div className="mb-2 bg-base-100 lg:h-36 p-4 rounded">
             <p>
               Product Description:{" "}
               <span className="text-slate-800 font-bold">{description}</span>
