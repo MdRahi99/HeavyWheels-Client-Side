@@ -19,11 +19,11 @@ const ProductsDetails = ({ products, setSelectedProduct }) => {
 
   return (
     <div>
-      <div className="card bg-base-100 shadow-lg">
-        <figure className="px-4 my-4 h-60 w-full py-4">
+      <div className="card bg-slate-900 shadow-lg">
+        <figure className="px-2 mt-2 h-60 w-full py-4">
           <img src={img} alt="img" className="rounded" />
         </figure>
-        <div className="card-body h-full bg-slate-300 mx-3 mb-3">
+        <div className="card-body h-full bg-slate-300 mx-2 mb-2">
           <h2 className="card-title">
             Product Name:{" "}
             <span className="text-orange-600 font-bold">{name}</span>
