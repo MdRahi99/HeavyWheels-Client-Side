@@ -24,7 +24,7 @@ const ProductsDetails = ({ products, setSelectedProduct }) => {
           <img src={img} alt="img" className="rounded" />
         </figure>
         <div className="card-body h-full bg-slate-300 mx-2 mb-2">
-          <h2 className="card-title">
+          <h2 className="card-title lg:h-20">
             Product Name:{" "}
             <span className="text-orange-600 font-bold">{name}</span>
           </h2>
