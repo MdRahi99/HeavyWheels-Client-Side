@@ -9,39 +9,43 @@ import useToken from "../../../Hooks/useToken";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  Title('Login');
-  
-  const { register, formState: { errors }, handleSubmit } = useForm();
+  Title("Login");
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   const { signIn, providerLogin } = useContext(AuthContext);
-  const [loginError, setLoginError] = useState('');
-  const [loginUserEmail, setLoginUserEmail] = useState('');
+  const [loginError, setLoginError] = useState("");
+  const [loginUserEmail, setLoginUserEmail] = useState("");
   const [token] = useToken(loginUserEmail);
   const location = useLocation();
   const navigate = useNavigate();
 
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || "/";
 
   const googleProvider = new GoogleAuthProvider();
 
-  if(token){
-    navigate(from, {replace: true});
+  if (token) {
+    navigate(from, { replace: true });
   }
 
-  const handleLogin = data => {
-      console.log(data);
-      setLoginError('');
-      signIn(data.email, data.password)
-          .then(result => {
-              const user = result.user;
-              console.log(user);
-              setLoginUserEmail(data.email);
-              toast.success('Login Successful')
-          })
-          .catch(error => {
-              console.log(error.message)
-              setLoginError(error.message);
-          });
-  }
+  const handleLogin = (data) => {
+    console.log(data);
+    setLoginError("");
+    signIn(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        setLoginUserEmail(data.email);
+        toast.success("Login Successful");
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setLoginError(error.message);
+      });
+  };
 
   const handleGoogleSignIn = () => {
     providerLogin(googleProvider)
@@ -51,14 +55,48 @@ const Login = () => {
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        console.log(error.message)
+        console.log(error.message);
         setLoginError(error.message);
       });
   };
 
   return (
     <div>
-      <section className="bg-gray-50 min-h-screen flex items-center justify-center">
+      <section className="bg-gray-50 min-h-screen flex flex-col items-center justify-center">
+        <div className="p-2 mb-12 bg-slate-900">
+          <div className="p-4 bg-slate-200 text-slate-900">
+            <h2>
+              For Sign in as a Seller/Buyer you can use below username and
+              password
+            </h2>
+            <div className="flex flex-row gap-4 my-6 items-center justify-between">
+              <div>
+                <p>For Sign in as a Buyer:</p>
+                <hr className="mb-2" />
+                <p>
+                  Username: <span className="font-bold">buyer@gmail.com</span>
+                </p>
+                <p>
+                  Password: <span className="font-bold">buyer10A#</span>
+                </p>
+              </div>
+              <div>
+                <p>For Sign in as a Seller:</p>
+                <hr className="mb-2" />
+                <p>
+                  Username: <span className="font-bold">seller@gmail.com</span>
+                </p>
+                <p>
+                  Password: <span className="font-bold">seller10A#</span>
+                </p>
+              </div>
+            </div>
+            <h1 className="text-orange-400 font-bold">
+              Note: This section added for test case only. Admin Login already
+              given in input section
+            </h1>
+          </div>
+        </div>
         <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
           <div className="md:w-1/2 px-8 md:px-16">
             <h2 className="font-bold text-2xl text-[#002D74]">Login</h2>
@@ -114,8 +152,12 @@ const Login = () => {
                   <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                 </svg>
               </div>
-              
-              <input className='bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300' value="Login" type="submit" />
+
+              <input
+                className="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300"
+                value="Login"
+                type="submit"
+              />
               <div>
                 {loginError && <p className="text-red-600">{loginError}</p>}
               </div>
@@ -127,7 +169,8 @@ const Login = () => {
               <hr className="border-gray-400" />
             </div>
 
-            <button onClick={handleGoogleSignIn}
+            <button
+              onClick={handleGoogleSignIn}
               className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-[#002D74]"
             >
               <svg
