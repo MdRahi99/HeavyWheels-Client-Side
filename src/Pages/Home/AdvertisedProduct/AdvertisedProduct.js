@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import img from "../../../assets/images/advertise.jpg";
 
 const AdvertisedProduct = () => {
   const [adsStatus, setAdsStatus] = useState([]);
@@ -15,16 +14,11 @@ const AdvertisedProduct = () => {
       {adsStatus?.length === 0 ? (
         <></>
       ) : (
-        <div className="bg-slate-900 p-4 my-12 mx-4">
-          <div className="card w-full h-60 bg-base-100 shadow-xl image-full">
-            <figure>
-              <img className="w-full" src={img} alt="" />
-            </figure>
-            <div className="card-body">
-              <h3 className="text-3xl font-bold text-slate-100 bg-slate-800 p-16 text-center">
+        <div className="bg-base-200 p-4 my-12 mx-2 lg:mx-0">
+          <div>
+              <h3 className="text-2xl font-bold text-slate-200 bg-slate-700 p-4 text-center">
                 Best value for money products
               </h3>
-            </div>
           </div>
 
           <div className="my-12 grid grid-cols-1 bg-base-200 p-8 gap-8 lg:grid-cols-3">
