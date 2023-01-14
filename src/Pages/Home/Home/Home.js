@@ -6,6 +6,7 @@ import Banner from '../Banner/Banner';
 import Reviews from '../Reviews/Reviews';
 import Contact from '../../Contact/Contact';
 import Service from '../Service/Service';
+import Suggetions from '../Suggetions/Suggetions';
 
 const Home = () => {
 
@@ -18,6 +19,7 @@ const Home = () => {
           <AllCategories></AllCategories>
           <Reviews></Reviews>  
           <AdvertisedProduct></AdvertisedProduct>
+          <Suggetions></Suggetions>
           <Contact></Contact>
         </div>
     );
